@@ -3,15 +3,16 @@ import mainLogo from "./assets/EzzErreurLogo.png";
 import Home from "./pages/homepage";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import './index.css';
 
 function App() {
   return (
     <div>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">
-              <img src={mainLogo} alt="EzzErreur Logo" />
+              <img className="h-10 w-10" src={mainLogo} alt="EzzErreur Logo" />
             </Link>
           </li>
           <li>
@@ -24,7 +25,7 @@ function App() {
             <Link to="/signup">Signup</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       <Routes>
         <Route path="/login" element={<Login />} />

@@ -66,7 +66,7 @@ function SignUp() {
     <>
       <div
         style={{
-          background: `linear-gradient(0deg, #9092FF -10.03%, rgba(144, 146, 255, 0) 98.39%), #FFFFFF`,
+          background: `linear-gradient(0deg, #37c189 -10.03%, rgba(144, 146, 255, 0) 98.39%), #212121`,
         }}
       >
         <div className="flex flex-col items-center justify-evenly min-h-screen gap-0 sm:flex-wrap lg:flex-nowrap sm:flex-row md:justify-center md:gap-12 lg:justify-evenly max-w-[3000px] mx-auto">
@@ -82,13 +82,13 @@ function SignUp() {
             </div>
           } */}
 
-          <div className="flex items-center justify-center w-full h-screen bg-white sm:py-10 lg:py-0 lg:w-1/2 lg:items-center">
+          <div className="flex items-center justify-center w-full h-screen bg-black sm:py-10 lg:py-0 lg:w-1/2 lg:items-center">
             <div className=" flex items-center justify-center w-[90%] sm:w-2/3  lg:mt-0 md:w-3/4 lg:w-2/3 max-w-[420px] sm:max-w-[600px] md:max-w-[420px] ">
               <div className="rounded-2xl bg-bgPrimary  px-10 pb-[60px] w-full md:w-[410px]">
                 <div>
                   <Link to={"/"}>
                     <img
-                      className="h-16 mx-auto w-36"
+                      className="h-20 mx-auto "
                       src={mainLogo}
                       alt="LinkCollect"
                     />
