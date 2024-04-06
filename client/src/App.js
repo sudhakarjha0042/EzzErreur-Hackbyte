@@ -3,7 +3,7 @@ import mainLogo from "./assets/EzzErreurLogo.png";
 import Home from "./pages/homepage";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
-import './index.css';
+import "./index.css";
 
 function App() {
   return (
