@@ -23,7 +23,7 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
   const menuItem = [
     {
       name: 'Home',
-      link: `/`,
+      link: `/home`,
       icon: home,
       activeIcon: ActiveHome,
     },
@@ -59,7 +59,7 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
         {/* Profile Info */}
         <div className="flex flex-col gap-8">
           <Link
-            to="/"
+            to="/home"
             className="inline-flex rounded-md bg-gray-900 hover:bg-cyan-950 hover:scale-[1.03] items-center border-transparent justify-center w-fit mx-7 px-3 my-4 "
           >
             <img

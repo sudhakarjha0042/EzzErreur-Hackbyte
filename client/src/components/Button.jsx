@@ -2,11 +2,11 @@ import React, { forwardRef, useContext } from "react";
 import { cva } from "class-variance-authority";
 
 const ButtonVariants = cva(
-  " flex w-full items-center justify-center cursor-pointer gap-2",
+  " flex w-full items-center justify-center hover:scale-105 cursor-pointer gap-2",
   {
     variants: {
       variant: {
-        primary: " bg-primary-500 text-white ",
+        primary: "border bg-primary-500 text-white ",
         primaryOutlined:
           " bg-neutral-100 border-2 border-primary-500 text-primary-500 ",
         secondaryOutline:

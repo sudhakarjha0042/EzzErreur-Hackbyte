@@ -113,6 +113,7 @@ function SignUp() {
                         placeholder="Name (Water White)"
                         onInput={onInput}
                         value={data.name}
+                        
                       />
                     </div>
                     <div className="mb-3">
@@ -150,19 +151,23 @@ function SignUp() {
                 </p> */}
 
                     <Button
+
                       variant="primary"
-                      disabled={!isValidInput}
+                      
                       onClick={handleRegister}
                       isLoading={isSiging}
                     >
                       {!isSiging ? "Sign Up" : <Loader />}
                     </Button>
+                    <div className="flex w-full justify-center items-center flex-col gap-1 my-3" >
+
                     <p className="mt-1 font-light text-left text-neutral-400">
                       Already have an account?{" "}
-                      <Link to="/login" className="font-bold text-primary-500">
-                        Log in
-                      </Link>
                     </p>
+                      <Link to="/login" className="font-bold text-center text-white">
+                        Log In
+                      </Link>
+                    </div>
                   </form>
                 </div>
                 <hr className="mt-4 hr-text" data-content="OR" />
