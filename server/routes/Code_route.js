@@ -10,6 +10,7 @@ const {
   getPostbyID,
   getallCode,
   cleanCodeSnippet,
+  gitAnalyze,
   getAllUserCode,
 } = require("../controller/codeController");
 const { verifyUser } = require("../middlewares/auth_middleware");
@@ -21,6 +22,7 @@ router.get("/getpostbyID", getPostbyID);
 router.post("/postCode", verifyUser, createCodeSnippet);
 router.post("/optimiseCode", verifyUser, optimiseCodeSnippet);
 router.post("/cleanCode", verifyUser, cleanCodeSnippet);
+router.post("/gitanalyze", verifyUser, gitAnalyze);
 router.post("/getallCode", verifyUser, getallCode);
 router.post("/getallUserCode", verifyUser, getAllUserCode);
 router.post("/likeCodeSnipet", verifyUser, likeCodeSnipet);
