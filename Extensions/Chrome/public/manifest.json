@@ -3,7 +3,10 @@
   "version": "1.0",
   "manifest_version": 3, 
   "name": "Your Code Booking Marking Tool",
-  
+  "permissions": [ 
+    "activeTab"
+], 
+
   "action":{
     "default_popup": "index.html",
     "default_title": "Latest Covid Report",
@@ -12,8 +15,11 @@
       "128":"EzzErreurLogoM.png"
     }
 },
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+
+"content_scripts": [
+  {
+    "matches": ["https://github.com/*pull*"],
+    "js":  ["contentScripts/content.js"]
+  }
+]
 }
