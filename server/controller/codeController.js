@@ -1,8 +1,9 @@
-const Postmodel = require("../models/CodeModel");
-const Profilemodel = require("../models/ProfileModel");
 // const LikePostmodel = require("../models/LikePostModel");
 const moment = require("moment");
 const LikePostModel = require("../models/LikePostModel");
+const Like = require("../models/LikePostModel");
+const { default: mongoose } = require("mongoose");
+const CodeSnipet = require("../models/CodeModel");
 
 const createCodeSnippet = async (req, res) => {
   console.log("create post controller");
@@ -11,58 +12,21 @@ const createCodeSnippet = async (req, res) => {
   console.log("post controller function", userId);
 
   try {
-    // Find the profile of the user who created the post
-    const userProfile = await Profilemodel.findOne({ user: userId });
-
-    console.log("profile id is", userProfile);
-
-    if (!userProfile) {
-      return res.status(404).json({ error: "User profile not found" });
-    }
-
-    // Check the user's posting history within the last 24 hours
-    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const userPostCount = await Postmodel.countDocuments({
-      createdBy: userProfile._id,
-      createdAt: { $gte: twentyFourHoursAgo },
-    });
-
-    const allposts = await Postmodel.find({
-      createdBy: userProfile._id,
-      createdAt: { $gte: twentyFourHoursAgo },
-    });
-    console.log("all posts", allposts);
-
-    console.log("post count is", userPostCount);
-
-    if (userPostCount >= 3) {
-      return res
-        .status(400)
-        .json({ error: "Maximum limit of 3 posts reached in 24 hours" });
-    }
-
     // Create a new post instance associated with the user's profile
-    const newCodeSnipet = new Postmodel({
+    const newCodeSnipet = new CodeSnipet({
       title,
       description,
       tags,
       codeSnipet,
-      createdBy: userProfile._id, // Reference to the user's profile
+      createdBy: userId, // Reference to the user's profile
     });
 
     // Save the post to the database
     await newCodeSnipet.save();
 
-    // Update the user's profile to include the newly created post
-    await Profilemodel.findByIdAndUpdate(
-      userProfile._id,
-      { $push: { posts: newCodeSnipet._id } },
-      { new: true }
-    );
-
     res
       .status(201)
-      .json({ message: "Video posted successfully", post: newCodeSnipet });
+      .json({ message: "Code Added successfully", post: newCodeSnipet });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -128,54 +92,61 @@ const getPostbyID = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
 const likeCodeSnipet = async (req, res) => {
   try {
-    // Extract userId and postId from request
+    // Extract userId and codeSnipetId from request
     const userId = req.userId;
-    const { postId } = req.body;
-    const profile = await Profilemodel.findOne({ user: userId });
+    const { codeSnipetId } = req.body;
 
-    // Check if user already liked/unliked the post and perform the appropriate action
-    const existingLike = await LikePostModel.findOne({
-      user: profile._id,
-      post: postId,
-    });
+    // Check if user already liked/unliked the code snippet and perform the appropriate action
+    const existingLike = await Like.findOne({ userId, codeSnipetId });
 
     if (existingLike) {
-      // User is unliking the post
-      await LikePostModel.db.transaction(async () => {
-        await LikePostModel.deleteOne({ _id: existingLike._id }); // Delete the existing like
-        await Postmodel.findByIdAndUpdate(
-          postId,
+      // User is unliking the code snippet
+      const session = await mongoose.startSession();
+      session.startTransaction();
+
+      try {
+        await Like.deleteOne({ _id: existingLike._id }, { session }); // Delete the existing like
+        await CodeSnipet.findByIdAndUpdate(
+          codeSnipetId,
           { $inc: { likeNumber: -1 } }, // Decrement likeNumber
-          { new: true }
+          { new: true, session }
         );
-      });
+        await session.commitTransaction();
+      } catch (error) {
+        await session.abortTransaction();
+        throw error;
+      } finally {
+        session.endSession();
+      }
 
-      return res.json({ message: "Post unliked successfully" });
+      return res.json({ message: "Code snippet unliked successfully" });
     } else {
-      // User is liking the post
-      const newLike = new LikePostModel({
-        user: profile._id,
-        post: postId,
-      });
+      // User is liking the code snippet
+      const newLike = new Like({ userId, codeSnipetId });
+      const session = await mongoose.startSession();
+      session.startTransaction();
 
-      const savedLike = await LikePostModel.db.transaction(async () => {
-        await newLike.save();
-        const savedPost = await Postmodel.findByIdAndUpdate(
-          postId,
-          { $inc: { likeNumber: 1 } }, // Increment likeNumber
-          { new: true }
+      try {
+        await newLike.save({ session });
+        const savedCodeSnipet = await CodeSnipet.findByIdAndUpdate(
+          codeSnipetId,
+          { $inc: { likeNumber: 1 }, $push: { likes: newLike._id } }, // Increment likeNumber and push new like ID to likes array
+          { new: true, session }
         );
-        return savedPost; // Return the updated post document
-      });
-
-      res.json({
-        likeNumber: savedLike.likeNumber,
-        message: "Post liked successfully",
-        post: savedLike,
-      });
+        await session.commitTransaction();
+        res.json({
+          likeNumber: savedCodeSnipet.likeNumber,
+          message: "Code snippet liked successfully",
+          codeSnipet: savedCodeSnipet,
+        });
+      } catch (error) {
+        await session.abortTransaction();
+        throw error;
+      } finally {
+        session.endSession();
+      }
     }
   } catch (error) {
     console.error(error);

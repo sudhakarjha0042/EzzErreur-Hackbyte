@@ -15,7 +15,7 @@ router.get("/getpostbyID", getPostbyID);
 
 //private routes
 router.post("/postCode", verifyUser, createCodeSnippet);
-router.post("/likepost", verifyUser, likeCodeSnipet);
+router.post("/likeCodeSnipet", verifyUser, likeCodeSnipet);
 router.delete("/deletepost", verifyUser, deletePost);
 
 module.exports = router;

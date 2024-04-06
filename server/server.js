@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // HTML file for testing the socket
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.status(200).json({ message: "Server is running" });
 });
 
 // Routes setup

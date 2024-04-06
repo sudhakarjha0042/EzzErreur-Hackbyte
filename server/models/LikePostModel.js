@@ -1,26 +1,22 @@
 const mongoose = require("mongoose");
 
-const postLike = new mongoose.Schema({
-  // User who liked the post
-  user: {
+const likeSchema = new mongoose.Schema({
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile",
     required: true,
   },
-  // Post that was liked
-  post: {
+  codeSnipetId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
+    ref: "CodeSnipet",
     required: true,
   },
-  // Timestamp of when the like was created
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-// Create an index for efficient querying based on post and user
-postLike.index({ post: 1, user: 1 });
+const Like = mongoose.model("Like", likeSchema);
 
-module.exports = mongoose.model("Like", postLike);
+module.exports = Like;

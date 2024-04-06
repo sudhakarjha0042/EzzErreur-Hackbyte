@@ -28,45 +28,9 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  Dob: {
-    type: Date,
-    required: true,
-  },
-  phoneNumber: {
-    type: String, // for special characters
-    required: true,
-    unique: true,
-  },
-  interests: [
-    // verify this field
-    {
-      type: String,
-    },
-  ],
-  cause: [
-    {
-      type: String,
-    },
-  ],
-  platform: [
-    {
-      type: String,
-    },
-  ],
-
   description: {
     type: String,
     required: false,
-  },
-  // payment gateway fields
-  stripeId: {
-    type: String,
-    unique: true,
-    default: null, // Default to null until a Stripe ID is assigned
-  },
-  isPaid: {
-    type: Boolean,
-    default: false,
   },
   referredBy: {
     type: mongoose.Schema.Types.ObjectId,

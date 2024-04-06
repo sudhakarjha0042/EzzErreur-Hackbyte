@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Profile = require("./ProfileModel");
+const Like = require("./LikePostModel");
 
 const counterSchema = new mongoose.Schema({
   _id: { type: String, required: true },
@@ -8,52 +8,24 @@ const counterSchema = new mongoose.Schema({
 
 const Counter = mongoose.model("Counter", counterSchema);
 
-const postSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  tags: {
-    type: [String],
-    default: [],
-  },
-  codeSnipet: {
-    type: String,
-    required: true,
-  },
-  // likes: {
-  //   type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Profile" }],
-  //   default: [],
-  // },
-
-  likeNumber: {
-    type: Number,
-    default: 0,
-  },
-  postCount: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
+const codeSchema = mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  tags: { type: [String], default: [] },
+  codeSnipet: { type: String, required: true },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Like" }], // Fix this line
+  likeNumber: { type: Number, default: 0 },
+  postCount: { type: Number, required: false, default: 0 },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Profile",
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  cursor: {
-    type: Number,
-  },
+  createdAt: { type: Date, default: Date.now },
+  cursor: { type: Number },
 });
 
-postSchema.pre("save", async function (next) {
+codeSchema.pre("save", async function (next) {
   const doc = this;
   if (doc.isNew || !doc.cursor) {
     // Add this condition
@@ -68,8 +40,9 @@ postSchema.pre("save", async function (next) {
   next();
 });
 
-postSchema.index({ createdBy: 1, type: 1 });
-postSchema.index({ communityId: 1 });
+codeSchema.index({ createdBy: 1, type: 1 });
+codeSchema.index({ communityId: 1 });
 
-const Post = mongoose.model("Post", postSchema);
-module.exports = Post;
+const CodeSnipet = mongoose.model("CodeSnipet", codeSchema);
+
+module.exports = CodeSnipet;

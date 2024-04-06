@@ -6,7 +6,6 @@ const { generateToken } = require("../services/token");
 const { hashPassword } = require("../services/crypt");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const stripe = require("stripe")(process.env.TEST_STRIPE_KEY); // test key
 
 // redis import
 // const { redisClient } = require("../config/redisConnection");
@@ -35,46 +34,11 @@ const checkField = async (req, res) => {
 const createUser = async (req, res) => {
   console.log("another function is working");
 
-  const referCode = req.query.refcode;
+  const { email, firstName, lastName, username, password } = req.body;
 
-  console.log("referCode is", referCode);
-  const {
-    email,
-    firstName,
-    lastName,
-    username,
-    password,
-    Dob,
-    phoneNumber,
-    interests,
-    cause,
-    platform,
-  } = req.body;
+  console.log(email, firstName, lastName, username, password);
 
-  console.log(
-    email,
-    firstName,
-    lastName,
-    username,
-    password,
-    Dob,
-    interests,
-    cause,
-    platform
-  );
-
-  if (
-    !email ||
-    !firstName ||
-    !lastName ||
-    !username ||
-    !password ||
-    !Dob ||
-    !phoneNumber ||
-    !interests ||
-    !cause ||
-    !platform
-  ) {
+  if (!email || !firstName || !lastName || !username || !password) {
     return res.status(400).json({ error: "All fields are mandatory!" });
   }
 
@@ -82,30 +46,10 @@ const createUser = async (req, res) => {
     // Check if username already exists
     const existingUsername = await Usermodel.findOne({ username });
     if (existingUsername) {
-      return res.status(400).json({ error: "Username already exists!" });
+      return res.status(400).json({ error: "Username already  exists!" });
     }
-
-    // Check if phone number already exists
-    const existingPhoneNumber = await Usermodel.findOne({ phoneNumber });
-    if (existingPhoneNumber) {
-      return res.status(400).json({ error: "Phone number already exists!" });
-    }
-
-    // Find user with the given refID
-    const referredByUser = await Usermodel.findOne({ refID: referCode });
-    if (!referredByUser) {
-      return res.status(400).json({ error: "Invalid referral code!" });
-    }
-
-    console.log("referredByUser is thissssssss ", referredByUser._id);
 
     const hashedPassword = await hashPassword(password);
-
-    // createing stripe Id
-    const customer = await stripe.customers.create({
-      email,
-      name: username,
-    });
 
     // Creating user
     const user = await Usermodel.create({
@@ -114,13 +58,6 @@ const createUser = async (req, res) => {
       lastName,
       username,
       password: hashedPassword,
-      Dob,
-      phoneNumber,
-      interests,
-      cause,
-      platform,
-      stripeId: customer.id,
-      referredBy: referredByUser._id,
     });
 
     const token = generateToken(user);
@@ -183,7 +120,8 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: "Invalid username or password - nor exist" });
     }
-
+    console.log("Plaintext password:", password);
+    console.log("Hashed password:", user.password);
     // Compare passwords
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
