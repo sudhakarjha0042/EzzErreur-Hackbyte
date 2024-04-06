@@ -3,7 +3,24 @@ console.log("Content script loaded");
 // Function to create the new button
 function createButton(pullRequestLink) {
   const button = document.createElement("button");
-  button.textContent = "Get Pull Request Details";
+  button.textContent = "Analyse PR"; /* Button text */
+  button.style.backgroundColor = "#161B22"; /* Background color */
+  button.style.color = "#fff"; /* Text color */
+  button.style.borderRadius = "5px"; /* Border radius */
+  button.style.padding = "10px 20px"; /* Padding */
+  button.style.marginTop = "10px"; /* Margin top */
+
+  // Optional: Add hover effect
+  button.addEventListener("mouseover", function () {
+    button.style.backgroundColor =
+      "#101419"; /* Darker background color on hover */
+  });
+
+  button.addEventListener("mouseout", function () {
+    button.style.backgroundColor =
+      "#161B22"; /* Restore original background color on mouseout */
+  });
+
   button.addEventListener("click", async () => {
     try {
       // Step 1: Get the current URL
@@ -58,23 +75,53 @@ function createButton(pullRequestLink) {
         }
       );
 
-      console.log(apiResponse);
+      console.log("API Response:", apiResponse);
       const apiData = await apiResponse.json();
-      console.log(apiData);
+      console.log("API Data:", apiData);
+
+      // Extract the JSON string from the 'result' property
+      const resultJson = JSON.parse(apiData.result);
 
       // Step 9: Create a container element to display the data
       const container = document.createElement("div");
       container.style.display = "flex";
+      container.style.backgroundColor = "#101419"; /* Background color */
+      container.style.border = "2px solid #37C1B9"; /* Border color */
+      container.style.borderRadius = "13px"; /* Border radius */
+      container.style.padding = "20px"; /* Padding */
       container.style.flexDirection = "column";
       container.style.alignItems = "flex-start";
 
       // Step 10: Create and append elements to display the data
       const percentageElement = document.createElement("h3");
-      percentageElement.textContent = apiData.percentage; // Corrected property access
-      container.appendChild(percentageElement);
-
       const explanationElement = document.createElement("p");
-      explanationElement.textContent = apiData.Explaination; // Corrected property access
+
+      // Parse the response string into a JSON object
+      let results;
+      try {
+        results = JSON.parse(apiData.result);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        results = {}; // Set an empty object if parsing fails
+      }
+
+      // Check if the properties exist in the parsed JSON object
+      if (
+        results.hasOwnProperty("percentage") &&
+        results.hasOwnProperty("Explaination") // Check for the correct property name
+      ) {
+        console.log("Properties found");
+        percentageElement.textContent =
+          results.percentage + "chances that this will work out!!";
+        explanationElement.textContent = results.Explaination; // Corrected property name here
+      } else {
+        console.log("Other response structure");
+        // Handle any other response structure
+        percentageElement.textContent = "Percentage: N/A";
+        explanationElement.textContent = "Explanation: N/A";
+      }
+
+      container.appendChild(percentageElement);
       container.appendChild(explanationElement);
 
       // Step 11: Replace the button with the container
