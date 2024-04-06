@@ -19,7 +19,7 @@ const {
 
 //public routes
 router.post("/checkfield", checkField);
-router.post("/createuser", createUser);
+router.post("/createUser", createUser);
 // router.post("/sendotp", takeEmailSendOtp);
 // router.post("/verify-otp", verifyOtp);
 router.post("/login", login);

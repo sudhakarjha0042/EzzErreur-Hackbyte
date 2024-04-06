@@ -10,11 +10,11 @@ const bcrypt = require("bcrypt");
 // redis import
 // const { redisClient } = require("../config/redisConnection");
 const checkField = async (req, res) => {
-  const { email, username, phoneNumber } = req.body;
+  const { email, username } = req.body;
   try {
     // Check if either phone number or email exists in the database
     const user = await Usermodel.findOne({
-      $or: [{ phoneNumber }, { email }, { username }],
+      $or: [, { email }, { username }],
     });
 
     if (user) {
@@ -235,7 +235,6 @@ const verifyOtp = async (req, res) => {
 //     // Define the allowed fields that can be updated
 //     const allowedFields = [
 //       "email",
-//       "phoneNumber",
 //       "Dob",
 //       "location",
 //       "password",
