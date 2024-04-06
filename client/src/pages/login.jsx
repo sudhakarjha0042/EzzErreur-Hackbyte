@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import mainLogo from "../assets/EzzErreurLogo.png";
 
 import Banner from "../components/Banner";
@@ -38,12 +38,12 @@ function Login() {
   };
 
   const isValidName = data.name.length > 3;
-  const emailPattern = /^\S+@\S+\.\S+$/;
-  const isValidEmail = emailPattern.test(data.email);
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&#]{8,}$/;
   const isValidPassword = passwordPattern.test(data.password);
-  const isValidInput = isValidName && isValidEmail && isValidPassword;
+  const isValidInput = isValidName;
+
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -51,9 +51,29 @@ function Login() {
       return;
     }
     setIsSigning(true);
-    const { name, email, password } = data;
+    const { name, password } = data;
     try {
-      // const { data } = await register(name, email, password.trim());
+      // DO NOT TOUCH BELOW CODE
+      const response = await fetch('https://ezzerreur-hackbyte.onrender.com/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: name,
+        password: password,
+      }),
+    });
+    const responseData = await response.json();
+    if (response.ok) {
+      console.log('Login successful');
+      localStorage.setItem('user', JSON.stringify(responseData.user));
+      localStorage.setItem('token', responseData.token);
+      navigate('/home');
+    } else {
+      console.error('Login failed:', responseData.message);
+    }
+    // DO NOT TOUCH ABOVE CODE
       setIsSigning(false);
       setVerifying(true);
     } catch (error) {
@@ -75,12 +95,6 @@ function Login() {
               <Banner />
             </div>
           )}
-
-          {/* {windowWidth < 600 &&
-            <div className="flex items-center justify-center w-full">
-              <img src={mainLogo} alt="" className="h-16 w-36" />
-            </div>
-          } */}
 
           <div className="flex items-center justify-center w-full bg-[#212121] text-[#17a199] sm:py-10 lg:py-0 lg:w-1/2 lg:items-center">
             <div className=" flex items-center justify-center p-10 w-[90%] sm:w-2/3  lg:mt-0 md:w-3/4 lg:w-2/3 max-w-[420px] sm:max-w-[600px] md:max-w-[420px] ">
@@ -113,16 +127,6 @@ function Login() {
                         placeholder="Homelander"
                         onInput={onInput}
                         value={data.name}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="homelander@gmail.com"
-                        onInput={onInput}
-                        value={data.email}
                       />
                     </div>
                     <div className="mb-4">
