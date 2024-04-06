@@ -3,24 +3,7 @@ console.log("Content script loaded");
 // Function to create the new button
 function createButton(pullRequestLink) {
   const button = document.createElement("button");
-  button.textContent = "Analyse PR"; /* Button text */
-  button.style.backgroundColor = "#007bff"; /* Background color */
-  button.style.color = "#fff"; /* Text color */
-  button.style.borderRadius = "5px"; /* Border radius */
-  button.style.padding = "10px 20px"; /* Padding */
-  button.style.marginTop = "10px"; /* Margin top */
-
-  // Optional: Add hover effect
-  button.addEventListener("mouseover", function () {
-    button.style.backgroundColor =
-      "#101419"; /* Darker background color on hover */
-  });
-
-  button.addEventListener("mouseout", function () {
-    button.style.backgroundColor =
-      "#161B22"; /* Restore original background color on mouseout */
-  });
-
+  button.textContent = "Get Pull Request Details";
   button.addEventListener("click", async () => {
     try {
       // Step 1: Get the current URL
@@ -57,34 +40,48 @@ function createButton(pullRequestLink) {
       const pullRequestDescription = pullRequestObject.body;
       const patchData = filesData.map((file) => file.patch).join("\n");
 
-      // Step 8: Create a container element to display the data
+      // Step 8: Send data to the API
+      const apiResponse = await fetch(
+        "https://ezzerreur-hackbyte.onrender.com/codes/gitanalyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjEwZWMxOWE0YTIzMzYwZjE0ZmM5ODciLCJpYXQiOjE3MTIzODUwNDksImV4cCI6MTcxNTk4NTA0OX0.INaVIDCg7jaH6YUMMB3c_y6vkb3d3bWAfTiKcQdQzUc",
+          },
+          body: JSON.stringify({
+            title: pullRequestTitle,
+            description: pullRequestDescription,
+            patchfiles: patchData,
+          }),
+        }
+      );
+
+      console.log(apiResponse);
+      const apiData = await apiResponse.json();
+      console.log(apiData);
+
+      // Step 9: Create a container element to display the data
       const container = document.createElement("div");
       container.style.display = "flex";
-      container.style.backgroundColor = "#101419"; /* Background color */
-      container.style.border = "2px solid #37C1B9"; /* Border color */
-      container.style.borderRadius = "13px"; /* Border radius */
-      container.style.padding = "20px"; /* Padding */
       container.style.flexDirection = "column";
       container.style.alignItems = "flex-start";
 
-      // Step 9: Create and append elements to display the data
-      const titleElement = document.createElement("h3");
-      titleElement.textContent = pullRequestTitle;
-      container.appendChild(titleElement);
+      // Step 10: Create and append elements to display the data
+      const percentageElement = document.createElement("h3");
+      percentageElement.textContent = apiData.percentage; // Corrected property access
+      container.appendChild(percentageElement);
 
-      const descriptionElement = document.createElement("p");
-      descriptionElement.textContent = pullRequestDescription;
-      container.appendChild(descriptionElement);
+      const explanationElement = document.createElement("p");
+      explanationElement.textContent = apiData.Explaination; // Corrected property access
+      container.appendChild(explanationElement);
 
-      const patchElement = document.createElement("pre");
-      patchElement.textContent = patchData;
-      container.appendChild(patchElement);
-
-      // Step 10: Replace the button with the container
+      // Step 11: Replace the button with the container
       const buttonParent = button.parentNode;
       buttonParent.replaceChild(container, button);
 
-      // Step 11: Remove the click event listener from the replaced button
+      // Step 12: Remove the click event listener from the replaced button
       button.removeEventListener("click", button.clickHandler);
     } catch (error) {
       console.error("Error:", error);

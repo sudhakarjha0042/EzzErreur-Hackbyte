@@ -4,7 +4,7 @@ const LikePostModel = require("../models/LikePostModel");
 const Like = require("../models/LikePostModel");
 const { default: mongoose } = require("mongoose");
 const CodeSnipet = require("../models/CodeModel");
-const OpenAI = require('openai')
+const OpenAI = require("openai");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -42,16 +42,17 @@ const optimiseCodeSnippet = async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
         {
-        role: "system",
-        content: "You are a helpful assistant designed to optimise my code by doing good practices, adding useful comments and make code more readable. you just reply with the new code and no other comments.",
+          role: "system",
+          content:
+            "You are a helpful assistant designed to optimise my code by doing good practices, adding useful comments and make code more readable. you just reply with the new code and no other comments.",
         },
         { role: "user", content: `optimise this code for me : ${unOptimised}` },
       ],
-      model: "gpt-3.5-turbo-0125"
+      model: "gpt-3.5-turbo-0125",
     });
-  
+
     const optimisedCode = completion.choices[0].message.content;
-    res.json({ optimisedCode:optimisedCode });
+    res.json({ optimisedCode: optimisedCode });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -64,16 +65,17 @@ const cleanCodeSnippet = async (req, res) => {
     const completion = await openai.chat.completions.create({
       messages: [
         {
-        role: "system",
-        content: "You are a helpful assistant designed to clean my code by removing comments, useless code and make code more readable. also remove statements that we wouldnt like in production - like console.log :",
+          role: "system",
+          content:
+            "You are a helpful assistant designed to clean my code by removing comments, useless code and make code more readable. also remove statements that we wouldnt like in production - like console.log :",
         },
         { role: "user", content: `clean this code for me : ${uncleanCode}` },
       ],
-      model: "gpt-3.5-turbo-0125"
+      model: "gpt-3.5-turbo-0125",
     });
-  
+
     const cleanedCode = completion.choices[0].message.content;
-    res.json({ cleanedCode:cleanedCode });
+    res.json({ cleanedCode: cleanedCode });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -86,35 +88,39 @@ const gitAnalyze = async (req, res) => {
   const patchfiles = req.body.patchfiles;
 
   try {
+    const prompt = `
+      
+      Analyse this code for me:
+      Title: ${title}
+      Description: ${description}
+      Patch Files: ${patchfiles}
 
-      const prompt = `Understand this pull request and the title and well as the decription and check how much it matches the title and the desciption , using that give me a percentage of whats the possiblity it will work out when we mearge it.
+      
+      Understand this pull request and the title and well as the decription and check how much it matches the title and the desciption , using that give me a percentage of whats the possiblity it will work out when we mearge it.
       You have to send me a json response only which will look like this 
 
       {
       "Explaination" :" [this should not be more than 100 words] " ,
-      "persentage": ""
+      "percentage": ""
       }
 
       make sure you only send back the JSON response noting else , or I will die.
-
-      Analyse this code for me:
-      Title: ${title}
-      Description: ${description}
-      Patch Files: ${patchfiles}`;
+`;
 
     const completion = await openai.chat.completions.create({
       messages: [
         {
           role: "system",
-          content: "You are a helpful assistant designed to analyse my code by giving me a summary of the code changes, the impact of the changes and the potential bugs in the code. you just reply with the analysis and no other comments.",
+          content:
+            "You are a helpful assistant designed to analyse my code by giving me a summary of the code changes, the impact of the changes and the potential bugs in the code. you just reply with the analysis and no other comments.",
         },
         { role: "user", content: prompt },
       ],
-      model: "gpt-3.5-turbo-0125"
+      model: "gpt-3.5-turbo-0125",
     });
-  
+
     const result = completion.choices[0].message.content;
-    res.json({ result:result });
+    res.json({ result: result });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
