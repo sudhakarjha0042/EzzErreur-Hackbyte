@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import logo from "./assets/EzzErreurLogo.png";
+import data from "./assets/practice.json";
+import SnipCard from "./elements/card";
 
 function App() {
   const [currentTabUrl, setCurrentTabUrl] = useState("");
@@ -20,19 +22,24 @@ function App() {
 
   return (
     <div
-      className="App"
-      style={{
-        display: "flex",
-        height: "100%",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+      className="App "
     >
-      <p>Hey this is Me and my extension</p>
-      <p>Hey this is Me and my extension</p>
-      <p>Hey this is Me and my extension</p>
-      <p>Current Tab URL: {currentTabUrl}</p>
+      <div className="outer1" >
+        
+        <div className="flex">
+          <h1>EzzErreur</h1>
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
+        <div className="cyan" >
+          Code Snippets:-
+        </div>
+
+        <div className="grid">
+        {data.posts.map(post => (
+            <SnipCard key={post._id} post={post} />          
+      ))}
+        </div>
+      </div>
     </div>
   );
 }

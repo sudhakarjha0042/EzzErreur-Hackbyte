@@ -1,0 +1,160 @@
+.snip-card {
+    
+    height: 40%;
+    width: 99%;
+    border-radius: 0px;
+    column-span: 1;
+    padding: 1px;
+    display: flex;
+    flex-direction: row;
+    font-size: x-small;
+    margin-top: 5px;
+    
+  }
+  
+  .card-content {
+    background-color: #2d3748;
+    color: #fff;
+    border-radius: 0.5rem;
+    
+    width: 99%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    text-align: left;
+    flex-direction: row;
+  }
+  
+  .image-container {
+    width: 90%;
+    height: 50%;
+    background-image: url('../assets/gridlines.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0.375rem;  
+  }
+  
+  .text-lg {
+    color: #a0aec0;
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+    cursor: pointer;
+  }
+  
+  .text-xl {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    line-height: 0.75rem;
+    padding-left: 10px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .font-bold {
+    font-weight: 800;
+  }
+  
+  .text-gray-600 {
+    color: #718096;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.3rem;
+  }
+  
+  .mr-1 {
+    margin-right: 0.1rem;
+  }
+  
+  .flex {
+    display: flex;
+    color: azure;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .hover-bg-112233:hover {
+    background-color: #112233;
+  }
+  
+  .hover-scale-103:hover {
+    transform: scale(1.03);
+  }
+
+  #relat{
+    position: relative;
+  }
+  
+  .modal-overlay {
+    position: absolute;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal {
+    position: relative;
+    top: 10% ;
+
+    width: 300px;
+    background-color: black;
+    color: #ccc;
+    font-size: x-small ;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 1px;
+    background-color: cyan;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .close-icon {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+  }
+  
+  .content {
+    border: 1px solid #ccc;
+    
+  }
+  .Arr-logo{
+    max-height: 30px;
+    min-width: 40px;
+    color: #fff;
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .copy-button,
+  .clean-button,
+  .optimize-button {
+    padding: 2px;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  a {
+    cursor: pointer;
+}
+  .button-group {
+    display: flex;
+    gap: 1px;
+  }
+  

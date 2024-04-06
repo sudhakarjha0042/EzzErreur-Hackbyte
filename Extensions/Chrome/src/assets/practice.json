@@ -1,0 +1,114 @@
+{
+    "posts": [
+      {
+        "_id": "661106695a7b0d73ea10dad3",
+        "title": "A code for Blue Button",
+        "description": "You can use this for adding a blue button which turns black on hover",
+        "tags": [
+          "black",
+          "CSS",
+          "Button"
+        ],
+        "codeSnipet": "```\n.button {\n  background-color: #04AA6D; /* Green */\n  border: none;\n  color: white;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n}\n```",
+        "likes": [
+          "66110786af99f080457b802e"
+        ],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T08:23:05.221Z",
+        "cursor": 2,
+        "__v": 0
+      },
+      {
+        "_id": "66112752cb2ded4ec96a208a",
+        "title": "A code for Default Button",
+        "description": "You can use this for adding a blue button which turns black on hover",
+        "tags": [
+          "black",
+          "CSS",
+          "Button"
+        ],
+        "codeSnipet": "```\n.button {\n  background-color: #04AA6D; /* Green */\n  border: none;\n  color: white;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n}\n```",
+        "likes": [],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T10:43:30.081Z",
+        "cursor": 3,
+        "__v": 0
+      },
+      {
+        "_id": "661127accb2ded4ec96a208d",
+        "title": "A code for Black Button",
+        "description": "You can use this for adding a blue button which turns black on hover",
+        "tags": [
+          "black",
+          "CSS",
+          "Button"
+        ],
+        "codeSnipet": "```\n.button {\n  background-color: #04AA6D; /* Green */\n  border: none;\n  color: white;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n}\n```",
+        "likes": [],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T10:45:00.038Z",
+        "cursor": 4,
+        "__v": 0
+      },
+      {
+        "_id": "661128b6cb2ded4ec96a2090",
+        "title": "Python Calculator Skeleton",
+        "description": "You can use this for adding a skeleton of a calculator in Python.",
+        "tags": [
+          "python",
+          "calculator",
+          "skeleton"
+        ],
+        "codeSnipet": "def calculator():\r\n    print(\"Welcome to the Python Calculator!\")\r\n    print(\"Select operation:\")\r\n    print(\"1. Add\")\r\n    print(\"2. Subtract\")\r\n    print(\"3. Multiply\")\r\n    print(\"4. Divide\")",
+        "likes": [],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T10:49:26.571Z",
+        "cursor": 5,
+        "__v": 0
+      },
+      {
+        "_id": "661128b6cb2ded4ec96a3090",
+        "title": "Python Calculator Skeleton",
+        "description": "You can use this for adding a skeleton of a calculator in Python.",
+        "tags": [
+          "python",
+          "calculator",
+          "skeleton"
+        ],
+        "codeSnipet": "def calculator():\r\n    print(\"Welcome to the Python Calculator!\")\r\n    print(\"Select operation:\")\r\n    print(\"1. Add\")\r\n    print(\"2. Subtract\")\r\n    print(\"3. Multiply\")\r\n    print(\"4. Divide\")",
+        "likes": [],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T10:49:26.571Z",
+        "cursor": 5,
+        "__v": 0
+      },
+      {
+        "_id": "661128b6cb2ded4ec96a4090",
+        "title": "Python New Ward",
+        "description": "You can use this for adding a skeleton of a calculator in Python.", 
+        "tags": [
+          "python",
+          "New",
+          "Warding"
+        ],
+        "codeSnipet": "def calculator():\r\n    print(\"Welcome to the Python Helper!\")\r\n    print(\"Select operation:\")\r\n    print(\"1. Add\")\r\n    print(\"2. Subtract\")\r\n    print(\"3. Multiply\")\r\n    print(\"4. Divide\")",
+        "likes": [],
+        "likeNumber": 0,
+        "postCount": 0,
+        "createdBy": null,
+        "createdAt": "2024-04-06T10:49:26.571Z",
+        "cursor": 5,
+        "__v": 0
+      }  
+    ]
+  }
