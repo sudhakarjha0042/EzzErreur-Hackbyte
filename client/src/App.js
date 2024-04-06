@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Explore from "./pages/Explore";
 import './index.css';
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
         <Route path="/explore" element = {<Explore/>}/>
+        <Route path="/settings" element={<Settings/>} />
       </Routes>
     </div>
   );
