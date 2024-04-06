@@ -4,6 +4,9 @@ const LikePostModel = require("../models/LikePostModel");
 const Like = require("../models/LikePostModel");
 const { default: mongoose } = require("mongoose");
 const CodeSnipet = require("../models/CodeModel");
+const OpenAI = require('openai')
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const createCodeSnippet = async (req, res) => {
   console.log("create post controller");
@@ -33,8 +36,49 @@ const createCodeSnippet = async (req, res) => {
   }
 };
 
-const optimiseCodeSnippet = async (req, res) => {};
-const cleanCodeSnippet = async (req, res) => {};
+const optimiseCodeSnippet = async (req, res) => {
+  const unOptimised = req.body.unOptimised;
+  try {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+        role: "system",
+        content: "You are a helpful assistant designed to optimise my code by doing good practices, adding useful comments and make code more readable. you just reply with the new code and no other comments.",
+        },
+        { role: "user", content: `optimise this code for me : ${unOptimised}` },
+      ],
+      model: "gpt-3.5-turbo-0125"
+    });
+  
+    const optimisedCode = completion.choices[0].message.content;
+    res.json({ optimisedCode:optimisedCode });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const cleanCodeSnippet = async (req, res) => {
+  const uncleanCode = req.body.uncleanCode;
+  try {
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+        role: "system",
+        content: "You are a helpful assistant designed to clean my code by removing comments, useless code and make code more readable. also remove statements that we wouldnt like in production - like console.log :",
+        },
+        { role: "user", content: `clean this code for me : ${uncleanCode}` },
+      ],
+      model: "gpt-3.5-turbo-0125"
+    });
+  
+    const cleanedCode = completion.choices[0].message.content;
+    res.json({ cleanedCode:cleanedCode });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 const getallCode = async (req, res) => {
   try {
