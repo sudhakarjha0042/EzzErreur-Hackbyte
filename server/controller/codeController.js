@@ -95,7 +95,6 @@ const gitAnalyze = async (req, res) => {
       Description: ${description}
       Patch Files: ${patchfiles}
 
-      
       Understand this pull request and the title and well as the decription and check how much it matches the title and the desciption , using that give me a percentage of whats the possiblity it will work out when we mearge it.
       You have to send me a json response only which will look like this 
 
