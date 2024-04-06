@@ -3,10 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const FlatListProvider = require('./flatListProvider');
 const axios = require('axios');
-const OpenAI = require('openai')
-
-const openai = new OpenAI({ apiKey: 'khudka use krow' });
-
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -312,38 +308,66 @@ async function activate(context) {
 	  });
 
 	  let cleancode_disposable = vscode.commands.registerCommand('Easy-Erreur.cleanCode', async () => {
+
+		const token = context.globalState.get('authToken');
 		const editor = vscode.window.activeTextEditor;
         const uncleanCode = editor.document.getText();
+
+		const node = {uncleanCode:uncleanCode}
 
 		if (!uncleanCode) {
             vscode.window.showInformationMessage('No text to be cleaned');
             return;
         }
+		if (token) {
+			const response = await axios.post('http://localhost:3001/codes/cleanCode',node, {
+				headers: { 'Authorization': `${token}` }
+			});
 
-		const completion = await openai.chat.completions.create({
-			messages: [
-			  {
-				role: "system",
-				content: "You are a helpful assistant designed to clean my code by removing comments, useless code and make code more readable. also remove statements that we wouldnt like in production - like console.log :",
-			  },
-			  { role: "user", content: `clean this code for me : ${uncleanCode}` },
-			],
-			model: "gpt-3.5-turbo-0125"
-		});
-
-		const cleanedCode = completion.choices[0].message.content;
-
-        // Replace the text in the editor with the cleaned code
-        editor.edit(editBuilder => {
-            const fullRange = new vscode.Range(editor.document.positionAt(0), editor.document.positionAt(uncleanCode.length));
-            editBuilder.replace(fullRange, cleanedCode);
-        });
-
-        vscode.window.showInformationMessage('Code cleaned successfully');
-		
+			const cleanedCode = response.data.cleanedCode;
+			// Replace the text in the editor with the cleaned code
+			editor.edit(editBuilder => {
+				const fullRange = new vscode.Range(editor.document.positionAt(0), editor.document.positionAt(uncleanCode.length));
+				editBuilder.replace(fullRange, cleanedCode);
+			});
+	
+			vscode.window.showInformationMessage('Code cleaned successfully');
+		} else {
+			vscode.window.showErrorMessage('Please log in first.');
+		}		
 	  });
 
-	context.subscriptions.push(disposable, login_disposable, disposable1, webview_disposable, postcode_disposable, cleancode_disposable);
+	  let optimisecode_disposable = vscode.commands.registerCommand('Easy-Erreur.optimiseCode', async () => {
+
+		const token = context.globalState.get('authToken');
+		const editor = vscode.window.activeTextEditor;
+        const unOptimised = editor.document.getText();
+
+		const node = {unOptimised:unOptimised}
+
+		if (!unOptimised) {
+            vscode.window.showInformationMessage('No text to be cleaned');
+            return;
+        }
+		if (token) {
+			const response = await axios.post('http://localhost:3001/codes/optimiseCode',node, {
+				headers: { 'Authorization': `${token}` }
+			});
+
+			const optimisedCode = response.data.optimisedCode;
+			// Replace the text in the editor with the cleaned code
+			editor.edit(editBuilder => {
+				const fullRange = new vscode.Range(editor.document.positionAt(0), editor.document.positionAt(unOptimised.length));
+				editBuilder.replace(fullRange, optimisedCode);
+			});
+	
+			vscode.window.showInformationMessage('Code optimised successfully');
+		} else {
+			vscode.window.showErrorMessage('Please log in first.');
+		}		
+	  });
+
+	context.subscriptions.push(disposable, login_disposable, disposable1, webview_disposable, postcode_disposable, cleancode_disposable, optimisecode_disposable);
 }
 
 // This method is called when your extension is deactivated
