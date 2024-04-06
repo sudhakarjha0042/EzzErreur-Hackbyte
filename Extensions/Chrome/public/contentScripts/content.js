@@ -4,7 +4,7 @@ console.log("Content script loaded");
 function createButton(pullRequestLink) {
   const button = document.createElement("button");
   button.textContent = "Analyse PR"; /* Button text */
-  button.style.backgroundColor = "#007bff"; /* Background color */
+  button.style.backgroundColor = "#161B22"; /* Background color */
   button.style.color = "#fff"; /* Text color */
   button.style.borderRadius = "5px"; /* Border radius */
   button.style.padding = "10px 20px"; /* Padding */
@@ -57,7 +57,32 @@ function createButton(pullRequestLink) {
       const pullRequestDescription = pullRequestObject.body;
       const patchData = filesData.map((file) => file.patch).join("\n");
 
-      // Step 8: Create a container element to display the data
+      // Step 8: Send data to the API
+      const apiResponse = await fetch(
+        "https://ezzerreur-hackbyte.onrender.com/codes/gitanalyze",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjEwZWMxOWE0YTIzMzYwZjE0ZmM5ODciLCJpYXQiOjE3MTIzODUwNDksImV4cCI6MTcxNTk4NTA0OX0.INaVIDCg7jaH6YUMMB3c_y6vkb3d3bWAfTiKcQdQzUc",
+          },
+          body: JSON.stringify({
+            title: pullRequestTitle,
+            description: pullRequestDescription,
+            patchfiles: patchData,
+          }),
+        }
+      );
+
+      console.log("API Response:", apiResponse);
+      const apiData = await apiResponse.json();
+      console.log("API Data:", apiData);
+
+      // Extract the JSON string from the 'result' property
+      const resultJson = JSON.parse(apiData.result);
+
+      // Step 9: Create a container element to display the data
       const container = document.createElement("div");
       container.style.display = "flex";
       container.style.backgroundColor = "#101419"; /* Background color */
@@ -67,24 +92,43 @@ function createButton(pullRequestLink) {
       container.style.flexDirection = "column";
       container.style.alignItems = "flex-start";
 
-      // Step 9: Create and append elements to display the data
-      const titleElement = document.createElement("h3");
-      titleElement.textContent = pullRequestTitle;
-      container.appendChild(titleElement);
+      // Step 10: Create and append elements to display the data
+      const percentageElement = document.createElement("h3");
+      const explanationElement = document.createElement("p");
 
-      const descriptionElement = document.createElement("p");
-      descriptionElement.textContent = pullRequestDescription;
-      container.appendChild(descriptionElement);
+      // Parse the response string into a JSON object
+      let results;
+      try {
+        results = JSON.parse(apiData.result);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        results = {}; // Set an empty object if parsing fails
+      }
 
-      const patchElement = document.createElement("pre");
-      patchElement.textContent = patchData;
-      container.appendChild(patchElement);
+      // Check if the properties exist in the parsed JSON object
+      if (
+        results.hasOwnProperty("percentage") &&
+        results.hasOwnProperty("Explaination") // Check for the correct property name
+      ) {
+        console.log("Properties found");
+        percentageElement.textContent =
+          results.percentage + "chances that this will work out!!";
+        explanationElement.textContent = results.Explaination; // Corrected property name here
+      } else {
+        console.log("Other response structure");
+        // Handle any other response structure
+        percentageElement.textContent = "Percentage: N/A";
+        explanationElement.textContent = "Explanation: N/A";
+      }
 
-      // Step 10: Replace the button with the container
+      container.appendChild(percentageElement);
+      container.appendChild(explanationElement);
+
+      // Step 11: Replace the button with the container
       const buttonParent = button.parentNode;
       buttonParent.replaceChild(container, button);
 
-      // Step 11: Remove the click event listener from the replaced button
+      // Step 12: Remove the click event listener from the replaced button
       button.removeEventListener("click", button.clickHandler);
     } catch (error) {
       console.error("Error:", error);

@@ -1,3 +1,4 @@
+import chrome from "chrome";
 console.log("Content script loaded");
 
 // Function to create the new button
@@ -160,3 +161,11 @@ if (
     }
   });
 }
+
+var contextMenuItem = {
+  id: "saveCode",
+  title: "SaveCode",
+  contexts: ["selection"],
+};
+
+chrome.contextMenus.create(contextMenuItem);

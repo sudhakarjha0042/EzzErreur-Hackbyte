@@ -4,6 +4,7 @@
   "manifest_version": 3, 
   "name": "Your Code Booking Marking Tool",
   "permissions": [
+    "contextMenus",
     "activeTab",
     "https://api.github.com/*",
     "https://ezzerreur-hackbyte.onrender.com/*"
@@ -11,13 +12,16 @@
 
   "action":{
     "default_popup": "index.html",
-    "default_title": "Latest Covid Report",
+    "default_title": "Save Your Code", 
     "default_icon":{
-      "16": "HackbyteS.png",
+      "16": "EzzErreurLogoM.png",
+      "32": "EzzErreurLogoM.png",
       "128":"EzzErreurLogoM.png"
     }
 },
-
+"background": {
+  "service_worker": "backgroundScript.js"
+},
 "content_scripts": [
   {
     "matches": ["https://github.com/*pull*"],
