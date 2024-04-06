@@ -1,82 +1,26 @@
 [
   {
-    "label": "head0",
+    "label": "main multiply",
+    "description": "msmsmsm",
+    "extension": "py",
     "tags": [
-      "h",
-      "s",
-      "a"
+      "msms",
+      "msmms",
+      "nsns"
     ],
-    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
-    "fileExtension": "html"
+    "code": "def multiply(x, y):\r\n    \"\"\"Function to multiply two numbers\"\"\"\r\n    return x * y"
   },
   {
-    "label": "head1",
+    "label": "choice inputs python",
+    "description": "this is used with proper error validation and error handling to safely take in inputs.",
+    "extension": "py",
     "tags": [
-      "h",
-      "s222",
-      "a"
+      "python",
+      "input",
+      "add",
+      "error"
     ],
-    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
-    "fileExtension": "html"
-  },
-  {
-    "label": "head222222",
-    "tags": [
-      "h22222",
-      "s",
-      "a"
-    ],
-    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
-    "fileExtension": "html"
-  },
-  {
-    "label": "head",
-    "tags": [
-      "h",
-      "s",
-      "a"
-    ],
-    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
-    "fileExtension": "html"
-  },
-  {
-    "label": "HackJhshhddh",
-    "tags": [
-      "html",
-      "css",
-      "js"
-    ],
-    "code": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>",
-    "fileExtension": "html"
-  },
-  {
-    "label": "Sarojani Naidu",
-    "tags": [
-      ""
-    ],
-    "code": "Sarojani Naidu",
-    "fileExtension": "html"
-  },
-  {
-    "label": "goooo",
-    "tags": [
-      ""
-    ],
-    "code": "<section id=\"courses\">\r\n        <h2>Courses</h2>\r\n        <ul>\r\n            <li>Mathematics</li>\r\n            <li>Science</li>\r\n            <li>History</li>\r\n            <li>English</li>\r\n            <li>Art</li>\r\n        </ul>\r\n    </section>",
-    "fileExtension": "html"
-  },
-  {
-    "label": "python",
-    "tags": [
-      "hello.python"
-    ],
-    "code": "def greet():\r\n    name = input(\"Enter your name: \")\r\n    print(\"Hello, {}! Welcome to the Python script.\".format(name))"
-  },
-  {
-    "label": "greet",
-    "tags": [
-      "a"
-    ],
-    "code": "greet()"
+    "code": "choice = input(\"Enter choice (1/2/3/4): \")\r\n\r\n    if choice not in ['1', '2', '3', '4']:\r\n        print(\"Invalid choice!\")\r\n        return\r\n\r\n    num1 = float(input(\"Enter first number: \"))\r\n    num2 = float(input(\"Enter second number: \"))\r\n\r\n    if choice == '1':\r\n        print(\"Result:\", add(num1, num2))\r\n    elif choice == '2':\r\n        print(\"Result:\", subtract(num1, num2))\r\n    elif choice == '3':\r\n        print(\"Result:\", multiply(num1, num2))\r\n    elif choice == '4':\r\n        try:\r\n            print(\"Result:\", divide(num1, num2))\r\n        except ValueError as e:\r\n            print(\"Error:\", e)",
+    "cloud": 0
   }
 ]
