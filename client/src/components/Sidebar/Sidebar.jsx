@@ -12,11 +12,12 @@ import ActiveExplore from '../../assets/blueExplore.svg';
 import ActiveHome from '../../assets/blueHome.svg';
 import ActiveSaved from '../../assets/outlinedSaved.svg';
 import NavbarItem from './NavItem';
+
  
 const Sidebar = ({ user, handleSetUser, windowWidth }) => {
   const state = useLocation();
 
-  const [isHovered, setIsHovered] = useState(false);
+  
 
   //   console.log(auth);
   const menuItem = [
@@ -32,12 +33,12 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
       icon: navigation,
       activeIcon: ActiveExplore,
     },
-    {
-      name: 'Saved Collection',
-      link: '/saved',
-      icon: saved,
-      activeIcon: ActiveSaved,
-    },
+    // {
+    //   name: 'Saved Collection',
+    //   link: '/saved',
+    //   icon: saved,
+    //   activeIcon: ActiveSaved,
+    // },
     {
       name: 'Settings',
       link: '/settings',
@@ -53,13 +54,13 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
         w-80 overflow-y-hidden scrollbar-hidden no-scrollbar`}
     >
       <div
-        className={`flex flex-col top-0 items-center justify-between  w-full `}
+        className={`flex flex-col top-0 items-center justify-between w-full `}
       >
         {/* Profile Info */}
         <div className="flex flex-col gap-8">
           <Link
             to="/"
-            className="inline-flex rounded-md bg-gray-900 items-center border-transparent justify-center w-fit mx-7 px-3 my-4 "
+            className="inline-flex rounded-md bg-gray-900 hover:bg-cyan-950 hover:scale-[1.03] items-center border-transparent justify-center w-fit mx-7 px-3 my-4 "
           >
             <img
               src={mainlogo}
