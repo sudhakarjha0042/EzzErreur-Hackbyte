@@ -33,6 +33,22 @@ const createCodeSnippet = async (req, res) => {
   }
 };
 
+const optimiseCodeSnippet = async (req, res) => {};
+const cleanCodeSnippet = async (req, res) => {};
+
+const getallCode = async (req, res) => {
+  try {
+    const posts = await CodeSnipet.find().populate({
+      path: "createdBy",
+      populate: { path: "user" }, // Populate the user field of the profile
+    });
+    res.json({ posts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 const deletePost = async (req, res) => {
   const userId = req.userId;
   const { postId } = req.body;
@@ -78,11 +94,26 @@ const deletePost = async (req, res) => {
   }
 };
 
+const getAllUserCode = async (req, res) => {
+  const userId = req.userId;
+
+  try {
+    const codes = await CodeSnipet.find({ createdBy: userId }).populate({
+      path: "createdBy",
+      populate: { path: "user" }, // Populate the user field of the profile
+    });
+    res.json({ codes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error: " + error });
+  }
+};
+
 const getPostbyID = async (req, res) => {
   const { postId } = req.query;
   console.log("post id is", postId);
   try {
-    const posts = await Postmodel.findById(postId).populate({
+    const posts = await CodeSnipet.findById(postId).populate({
       path: "createdBy",
       populate: { path: "user" }, // Populate the user field of the profile
     });
@@ -92,6 +123,7 @@ const getPostbyID = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 const likeCodeSnipet = async (req, res) => {
   try {
     // Extract userId and codeSnipetId from request
@@ -154,4 +186,13 @@ const likeCodeSnipet = async (req, res) => {
   }
 };
 
-module.exports = { createCodeSnippet, deletePost, likeCodeSnipet, getPostbyID };
+module.exports = {
+  createCodeSnippet,
+  deletePost,
+  likeCodeSnipet,
+  getPostbyID,
+  cleanCodeSnippet,
+  optimiseCodeSnippet,
+  getallCode,
+  getAllUserCode,
+};

@@ -25,7 +25,7 @@ app.use("/users", userRoutes);
 app.use("/codes", postRoutes);
 app.use("/explore", exploredpageRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const server = http.createServer(app);
 
 // Start the server

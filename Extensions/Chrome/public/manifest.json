@@ -1,0 +1,19 @@
+{
+  "short_name": "EzzErreur",
+  "version": "1.0",
+  "manifest_version": 3, 
+  "name": "Your Code Booking Marking Tool",
+  
+  "action":{
+    "default_popup": "index.html",
+    "default_title": "Latest Covid Report",
+    "default_icon":{
+      "16": "HackbyteS.png",
+      "128":"EzzErreurLogoM.png"
+    }
+},
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
