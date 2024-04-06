@@ -6,8 +6,10 @@ const {
   createCodeSnippet,
   deletePost,
   likeCodeSnipet,
+  optimiseCodeSnippet,
   getPostbyID,
   getallCode,
+  cleanCodeSnippet,
   getAllUserCode,
 } = require("../controller/codeController");
 const { verifyUser } = require("../middlewares/auth_middleware");
@@ -17,6 +19,8 @@ router.get("/getpostbyID", getPostbyID);
 
 //private routes
 router.post("/postCode", verifyUser, createCodeSnippet);
+router.post("/optimiseCode", verifyUser, optimiseCodeSnippet);
+router.post("/cleanCode", verifyUser, cleanCodeSnippet);
 router.post("/getallCode", verifyUser, getallCode);
 router.post("/getallUserCode", verifyUser, getAllUserCode);
 router.post("/likeCodeSnipet", verifyUser, likeCodeSnipet);

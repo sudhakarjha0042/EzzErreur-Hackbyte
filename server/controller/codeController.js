@@ -33,6 +33,9 @@ const createCodeSnippet = async (req, res) => {
   }
 };
 
+const optimiseCodeSnippet = async (req, res) => {};
+const cleanCodeSnippet = async (req, res) => {};
+
 const getallCode = async (req, res) => {
   try {
     const posts = await CodeSnipet.find().populate({
@@ -188,6 +191,8 @@ module.exports = {
   deletePost,
   likeCodeSnipet,
   getPostbyID,
+  cleanCodeSnippet,
+  optimiseCodeSnippet,
   getallCode,
   getAllUserCode,
 };
