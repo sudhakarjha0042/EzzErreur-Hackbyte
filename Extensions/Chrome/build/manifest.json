@@ -3,10 +3,11 @@
   "version": "1.0",
   "manifest_version": 3, 
   "name": "Your Code Booking Marking Tool",
-  "permissions": [ 
+  "permissions": [
     "activeTab",
-  "https://api.github.com/*"
-], 
+    "https://api.github.com/*",
+    "https://ezzerreur-hackbyte.onrender.com/*"
+  ],
 
   "action":{
     "default_popup": "index.html",
