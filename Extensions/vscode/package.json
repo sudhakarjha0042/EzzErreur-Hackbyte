@@ -1,0 +1,94 @@
+{
+  "name": "Easy-Erreur",
+  "displayName": "hello",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.87.2"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "Easy-Erreur.saveCodeSnippet",
+        "title": "Save Code Snippet",
+        "category": "easy-erreur",
+        "args": [
+          {
+            "name": "selectedText",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "command": "Easy-Erreur.login_EzzErreur",
+        "title": "Login to Ezz Erreur",
+        "category": "easy-erreur"
+      },
+      {
+        "command": "Easy-Erreur.pushSnippet_EzzErreur",
+        "title": "Push Snippet to Ezz Erreur",
+        "category": "easy-erreur",
+        "args": [
+          {
+            "label": "python",
+            "description": "You can use this for adding a blue button which turns black on hover",
+            "tags": [
+            "python"
+            ],
+            "codeSnipet": "def greet():\r\n    name = input(\"Enter your name: \")\r\n    print(\"Hello, {}! Welcome to the Python script.\".format(name))"
+          }
+        ]
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorTextFocus",
+          "command": "Easy-Erreur.saveCodeSnippet",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ezzerreur-explorer",
+          "title": "EzzErreur",
+          "icon": "logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "ezzerreur-explorer": [
+        {
+          "id": "ezzerreur-explorer",
+          "name": "Saved Snippets"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.88.0",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

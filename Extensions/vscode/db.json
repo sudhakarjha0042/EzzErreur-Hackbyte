@@ -1,0 +1,82 @@
+[
+  {
+    "label": "head0",
+    "tags": [
+      "h",
+      "s",
+      "a"
+    ],
+    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "head1",
+    "tags": [
+      "h",
+      "s222",
+      "a"
+    ],
+    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "head222222",
+    "tags": [
+      "h22222",
+      "s",
+      "a"
+    ],
+    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "head",
+    "tags": [
+      "h",
+      "s",
+      "a"
+    ],
+    "code": "<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "HackJhshhddh",
+    "tags": [
+      "html",
+      "css",
+      "js"
+    ],
+    "code": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "Sarojani Naidu",
+    "tags": [
+      ""
+    ],
+    "code": "Sarojani Naidu",
+    "fileExtension": "html"
+  },
+  {
+    "label": "goooo",
+    "tags": [
+      ""
+    ],
+    "code": "<section id=\"courses\">\r\n        <h2>Courses</h2>\r\n        <ul>\r\n            <li>Mathematics</li>\r\n            <li>Science</li>\r\n            <li>History</li>\r\n            <li>English</li>\r\n            <li>Art</li>\r\n        </ul>\r\n    </section>",
+    "fileExtension": "html"
+  },
+  {
+    "label": "python",
+    "tags": [
+      "hello.python"
+    ],
+    "code": "def greet():\r\n    name = input(\"Enter your name: \")\r\n    print(\"Hello, {}! Welcome to the Python script.\".format(name))"
+  },
+  {
+    "label": "greet",
+    "tags": [
+      "a"
+    ],
+    "code": "greet()"
+  }
+]
