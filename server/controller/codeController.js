@@ -101,7 +101,7 @@ const gitAnalyze = async (req, res) => {
 
       {
       "Explaination" :" [this should not be more than 100 words] " ,
-      "persentage": ""
+      "percentage": ""
       }
 
       make sure you only send back the JSON response noting else , or I will die.

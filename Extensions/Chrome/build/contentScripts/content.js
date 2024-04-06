@@ -70,11 +70,11 @@ function createButton(pullRequestLink) {
 
       // Step 10: Create and append elements to display the data
       const percentageElement = document.createElement("h3");
-      percentageElement.textContent = apiData.persentage; // Corrected property name
+      percentageElement.textContent = apiData.percentage; // Corrected property access
       container.appendChild(percentageElement);
 
       const explanationElement = document.createElement("p");
-      explanationElement.textContent = apiData.Explaination; // Corrected property name
+      explanationElement.textContent = apiData.Explaination; // Corrected property access
       container.appendChild(explanationElement);
 
       // Step 11: Replace the button with the container
