@@ -80,6 +80,47 @@ const cleanCodeSnippet = async (req, res) => {
   }
 };
 
+const gitAnalyze = async (req, res) => {
+  const title = req.body.title;
+  const description = req.body.description;
+  const patchfiles = req.body.patchfiles;
+
+  try {
+
+      const prompt = `Understand this pull request and the title and well as the decription and check how much it matches the title and the desciption , using that give me a percentage of whats the possiblity it will work out when we mearge it.
+      You have to send me a json response only which will look like this 
+
+      {
+      "Explaination" :" [this should not be more than 100 words] " ,
+      "persentage": ""
+      }
+
+      make sure you only send back the JSON response noting else , or I will die.
+
+      Analyse this code for me:
+      Title: ${title}
+      Description: ${description}
+      Patch Files: ${patchfiles}`;
+
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful assistant designed to analyse my code by giving me a summary of the code changes, the impact of the changes and the potential bugs in the code. you just reply with the analysis and no other comments.",
+        },
+        { role: "user", content: prompt },
+      ],
+      model: "gpt-3.5-turbo-0125"
+    });
+  
+    const result = completion.choices[0].message.content;
+    res.json({ result:result });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 const getallCode = async (req, res) => {
   try {
     const posts = await CodeSnipet.find().populate({
@@ -239,4 +280,5 @@ module.exports = {
   optimiseCodeSnippet,
   getallCode,
   getAllUserCode,
+  gitAnalyze,
 };
