@@ -16,8 +16,7 @@ import NavbarItem from './NavItem';
  
 const Sidebar = ({ user, handleSetUser, windowWidth }) => {
   const state = useLocation();
-
-  
+  const userData = JSON.parse(localStorage.getItem('user'));
 
   //   console.log(auth);
   const menuItem = [
@@ -81,19 +80,19 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
             <p
               className={`font-bold text-center text-[16px]`}
             >
-              Devendra
+              {userData.firstName} {userData.lastName}
             </p>
 
             <div
-              className={`flex flex-col justify-evenly items-start text-base font-normal gap-2 pt-8`}
+              className={`flex flex-col justify-between items-center text-base font-normal gap-2 pt-8`}
             >
-              <div className="flex flex-row justify-between items-center gap-[118px] text-xs">
-                <p>Link Saved</p>
-                <p className="ml-1">no.</p>
+              <div className="flex flex-row justify-between items-center w-full text-xs">
+                <p>Links Saved</p>
+                <p className="ml-1">8</p>
               </div>
-              <div className="flex flex-row items-center justify-between gap-24 text-xs whitespace-nowrap">
-                <p>Total Collection</p>
-                <p>colln</p>
+              <div className="flex flex-row justify-between items-center w-full text-xs">
+                <p>Likes</p>
+                <p className="ml-1">0</p>
               </div>
             </div>
           </div>
