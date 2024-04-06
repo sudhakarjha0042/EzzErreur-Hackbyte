@@ -3,6 +3,7 @@ import mainLogo from "./assets/EzzErreurLogo.png";
 import Home from "./pages/homepage";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
+import Explore from "./pages/Explore";
 import './index.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Home />} />
+        <Route path="/explore" element = {<Explore/>}/>
       </Routes>
     </div>
   );

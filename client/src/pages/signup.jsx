@@ -82,8 +82,8 @@ function SignUp() {
             </div>
           } */}
 
-          <div className="flex items-center justify-center w-full h-screen bg-black sm:py-10 lg:py-0 lg:w-1/2 lg:items-center">
-            <div className=" flex items-center justify-center w-[90%] sm:w-2/3  lg:mt-0 md:w-3/4 lg:w-2/3 max-w-[420px] sm:max-w-[600px] md:max-w-[420px] ">
+          <div className="flex items-center justify-center w-full bg-[#212121] text-[#17a199] sm:py-10 lg:py-0 lg:w-1/2 lg:items-center">
+            <div className=" flex items-center justify-center p-10 w-[90%] sm:w-2/3  lg:mt-0 md:w-3/4 lg:w-2/3 max-w-[420px] sm:max-w-[600px] md:max-w-[420px] ">
               <div className="rounded-2xl bg-bgPrimary  px-10 pb-[60px] w-full md:w-[410px]">
                 <div>
                   <Link to={"/"}>
@@ -93,12 +93,12 @@ function SignUp() {
                       alt="LinkCollect"
                     />
                   </Link>
-                  <h2 className="mt-2 mb-3 text-xl font-bold tracking-tight text-center sm:text-3xl">
+                  <h2 className="mt-2 mb-3 text-xl font-bold text-white tracking-tight text-center sm:text-3xl">
                     Welcome
                   </h2>
                   <p
-                    className="-mt-2 text-sm text-center sm:text-lg para"
-                    style={{ color: "#747474" }}
+                    className="-mt-2 text-sm  text-center sm:text-lg para"
+                   
                   >
                     Sign Up to LinkCollect
                   </p>
