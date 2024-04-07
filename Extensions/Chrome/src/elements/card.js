@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import "./card.css";
 import Arrow from "../assets/Arrow.svg";
 
-export default function SnipCard({post})  {
+export default function SnipCard({ post }) {
   const { title, description, codeSnipet } = post;
-  const cleanSnipet = codeSnipet.replace(/`/g, '');
+  const cleanSnipet = codeSnipet.replace(/`/g, "");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpenModal = () => {
     setIsOpen(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const copyContent = () => {
     // Select the content of the div
@@ -41,10 +41,12 @@ export default function SnipCard({post})  {
 
   return (
     <>
-      <div className="snip-card" >
+      <div className="snip-card">
         <div className="card-content">
           <h2 className="text-xl font-bold mb-2">{title}</h2>
-            <a onClick={handleOpenModal}><img src={Arrow} className="Arr-logo" alt="logo" /></a>
+          <a onClick={handleOpenModal}>
+            <img src={Arrow} className="Arr-logo" alt="logo" />
+          </a>
         </div>
       </div>
 
@@ -52,16 +54,50 @@ export default function SnipCard({post})  {
         <div className="modal-overlay">
           <div className="modal">
             <button onClick={handleCloseModal} className="close-button">
-              <svg className="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="close-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
             <div className="content">
-                <p>{description}</p>
-              <pre id="contentToCopy" >{cleanSnipet}</pre>
-              <div className="actions">
-                <button onClick={copyContent} className="copy-button">Copy to Clipboard</button>
-                
+              <p>{description}</p>
+              <pre
+                style={{
+                  padding: "10px",
+                }}
+                id="contentToCopy"
+              >
+                {cleanSnipet}
+              </pre>
+              <div
+                className="actions"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#161B22",
+                  height: "30px",
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = "#242f3e";
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = "#161B22";
+                }}
+              >
+                <button onClick={copyContent} className="copy-button">
+                  Copy to Clipboard
+                </button>
               </div>
             </div>
           </div>

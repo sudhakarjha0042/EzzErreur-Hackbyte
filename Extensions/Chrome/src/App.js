@@ -21,23 +21,20 @@ function App() {
   }, []);
 
   return (
-    <div
-      className="App "
-    >
-      <div className="outer1" >
-        
-        <div className="flex">
-          <h1>EzzErreur</h1>
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <div className="cyan" >
-          Code Snippets:-
+    <div className="App ">
+      <div className="outer1">
+        <div>
+          <div className="flex">
+            <h1>EzzErreur</h1>
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <div className="cyan">Code Snippets:-</div>
         </div>
 
         <div className="grid">
-        {data.posts.map(post => (
-            <SnipCard key={post._id} post={post} />          
-      ))}
+          {data.posts.map((post) => (
+            <SnipCard key={post._id} post={post} />
+          ))}
         </div>
       </div>
     </div>
