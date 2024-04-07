@@ -52,13 +52,13 @@ export default function SnipCard({ post }) {
 
   return (
     <>
-      <div className="bg-gray-900 hover:bg-[#112233] rounded-lg border border-gray-500 h-[200px] col-span-1 hover:scale-[1.03] flex flex-col" onClick={handleOpenModal}>
+      <div className="bg-gray-900 hover:bg-[#112233] cursor-pointer rounded-lg border border-gray-500 h-[200px] col-span-1 transition-all duration-150 hover:scale-[1.03] flex flex-col" >
         <div className="w-full p-3 h-full">
-          <div className="w-full rounded-md p-2 text-center h-1/2" style={{ backgroundImage: `url(${grids})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} >
+          <div onClick={handleOpenModal} className="w-full rounded-md p-2 text-center h-1/2" style={{ backgroundImage: `url(${grids})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }} >
             <h2 className="text-lg  text-slate-200" >{description}</h2>
           </div>
-          <h2 className="text-xl font-bold mb-2">{title}</h2>
-          <div className="flex items-center text-gray-600 mb-2">
+          <h2 onClick={handleOpenModal} className="text-xl font-bold mb-2">{title}</h2>
+          <div onClick={handleOpenModal} className="flex items-center text-gray-600 mb-2">
             <span className="mr-1">Likes:</span>
             <span>{likes}</span>
           </div>

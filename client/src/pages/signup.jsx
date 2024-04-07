@@ -104,30 +104,31 @@ function SignUp() {
                   </p>
                 </div>
                 <div className="mt-8 mb-3">
-                  <form onSubmit={handleRegister}>
+                <form className="flex flex-col justify-center items-center" onSubmit={handleRegister}>
                     <div className="mb-3">
-                      <Input
+                      <input type="text" 
                         id="name"
+                        placeholder="Username"
+                        onInput={onInput}
                         name="name"
-                        type="text"
-                        placeholder="Name (Water White)"
-                        onInput={onInput}
-                        value={data.name}
-                        
-                      />
+                        className="bg-transparent border-b-2 border-neutral-400 w-full p-2 text-white focus:outline-none"
+                        value={data.name}>
+
+                      </input>
                     </div>
-                    <div className="mb-3">
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="homelander@gmail.com"
-                        onInput={onInput}
-                        value={data.email}
-                      />
+                    <div>
+                      <input 
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="homelander@gmail.com"
+                      onInput={onInput}
+                      className="bg-transparent border-b-2 border-neutral-400 w-full p-2 text-white focus:outline-none"
+                      value={data.email}/>
                     </div>
                     <div className="mb-4">
-                      <Input
+                      <input
+                      className="bg-transparent border-b-2 border-neutral-400 w-full p-2 text-white focus:outline-none"
                         id="password"
                         name="password"
                         type="password"
@@ -139,8 +140,7 @@ function SignUp() {
                       />
                       {!isValidPassword && isPasswordfocus && (
                         <p className="text-xs text-error-500 mt-2 text-start">
-                          Password should be at least 8 of character and consist
-                          of 1 Uppercase, 1 lower case, 1 special character
+                          incorrect Password
                         </p>
                       )}
                     </div>
@@ -151,9 +151,8 @@ function SignUp() {
                 </p> */}
 
                     <Button
-
                       variant="primary"
-                      
+                      disabled={!isValidInput}
                       onClick={handleRegister}
                       isLoading={isSiging}
                     >
@@ -162,10 +161,10 @@ function SignUp() {
                     <div className="flex w-full justify-center items-center flex-col gap-1 my-3" >
 
                     <p className="mt-1 font-light text-left text-neutral-400">
-                      Already have an account?{" "}
+                      Already have an Account?{" "}
                     </p>
                       <Link to="/login" className="font-bold text-center text-white">
-                        Log In
+                        Login
                       </Link>
                     </div>
                   </form>

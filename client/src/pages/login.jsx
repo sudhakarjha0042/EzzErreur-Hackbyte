@@ -53,6 +53,7 @@ function Login() {
     setIsSigning(true);
     const { name, password } = data;
     try {
+      console.log("jjjjjjjjjjjjjjj")
       // DO NOT TOUCH BELOW CODE
       const response = await fetch('https://ezzerreur-hackbyte.onrender.com/users/login', {
       method: 'POST',
@@ -118,19 +119,21 @@ function Login() {
                   </p>
                 </div>
                 <div className="mt-8 mb-3">
-                  <form onSubmit={handleRegister}>
+                  <form className="flex flex-col justify-center items-center" onSubmit={handleRegister}>
                     <div className="mb-3">
-                      <Input
+                      <input type="text" 
                         id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Homelander"
+                        placeholder="Username"
                         onInput={onInput}
-                        value={data.name}
-                      />
+                        name="name"
+                        className="bg-transparent border-b-2 border-neutral-400 w-full p-2 text-white focus:outline-none"
+                        value={data.name}>
+
+                      </input>
                     </div>
                     <div className="mb-4">
-                      <Input
+                      <input
+                      className="bg-transparent border-b-2 border-neutral-400 w-full p-2 text-white focus:outline-none"
                         id="password"
                         name="password"
                         type="password"
@@ -171,7 +174,7 @@ function Login() {
                     </div>
                   </form>
                 </div>
-                <hr className="mt-4 hr-text" data-content="OR" />
+                
               </div>
             </div>
           </div>

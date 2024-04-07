@@ -39,46 +39,22 @@ function Settings() {
             <button className="text-xl rounded-md bg-cyan-950 hover:bg-cyan-500 hover:text-black transition-all duration-100 hover:scale-[1.02] p-1">Add Snippet!</button>
           </div>
         </div>
-        <div className="grid w-full px-3 grid-cols-3 justify-around gap-4">
+        <div className="grid w-full px-3 grid-cols-2 justify-around gap-4">
           {/* Dummy Option 2 */}
           <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 1</h2>
-            <p className="text-gray-300">This is a dummy option description.</p>
+            <h2 className="text-xl font-semibold mb-2">Account Info</h2>
+            <p className="text-gray-300">Your Profile</p>
           </div>
           {/* Dummy Option 2 */}
-          <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 2</h2>
-            <p className="text-gray-300">This is another dummy option description.</p>
-          </div>
           {/* Dummy Option 2 */}
           <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 1</h2>
-            <p className="text-gray-300">This is a dummy option description.</p>
-          </div>
-          {/* Dummy Option 2 */}
-          <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 2</h2>
-            <p className="text-gray-300">This is another dummy option description.</p>
+          <h2 className="text-xl font-semibold mb-2">Notifications</h2>
+          <p className="text-gray-300">Manage your Notifications</p>
           </div>
           {/* Dummy Option 2 */}
           <div className="bg-gray-800 p-4 rounded-md shadow-md">
             <h2 className="text-xl font-semibold mb-2">Dummy Option 1</h2>
             <p className="text-gray-300">This is a dummy option description.</p>
-          </div>
-          {/* Dummy Option 2 */}
-          <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 2</h2>
-            <p className="text-gray-300">This is another dummy option description.</p>
-          </div>
-          {/* Dummy Option 2 */}
-          <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 1</h2>
-            <p className="text-gray-300">This is a dummy option description.</p>
-          </div>
-          {/* Dummy Option 2 */}
-          <div className="bg-gray-800 p-4 rounded-md shadow-md">
-            <h2 className="text-xl font-semibold mb-2">Dummy Option 2</h2>
-            <p className="text-gray-300">This is another dummy option description.</p>
           </div>
           {/* Dummy Option 2 */}
           <div className="bg-gray-800 p-4 rounded-md shadow-md">
