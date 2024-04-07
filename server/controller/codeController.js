@@ -129,10 +129,12 @@ const gitAnalyze = async (req, res) => {
 
 const getallCode = async (req, res) => {
   try {
-    const posts = await CodeSnipet.find().populate({
-      path: "createdBy",
-      populate: { path: "user" }, // Populate the user field of the profile
-    });
+    const posts = await CodeSnipet.find()
+      .populate({
+        path: "createdBy",
+        populate: { path: "user" },
+      })
+      .sort({ likeNumber: -1 }); // Sort by the number of likes in descending order
     res.json({ posts });
   } catch (error) {
     console.error(error);
