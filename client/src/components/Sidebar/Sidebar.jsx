@@ -87,7 +87,7 @@ const Sidebar = ({ user, handleSetUser, windowWidth }) => {
               className={`flex flex-col justify-between items-center text-base font-normal gap-2 pt-8`}
             >
               <div className="flex flex-row justify-between items-center w-full text-xs">
-                <p>Links Saved</p>
+                <p>Code Saved</p>
                 <p className="ml-1">8</p>
               </div>
               <div className="flex flex-row justify-between items-center w-full text-xs">
