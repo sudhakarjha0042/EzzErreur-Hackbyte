@@ -26,6 +26,30 @@ export default function SnipCard({ post }) {
     setIsLiked(!isLiked);
   }
 
+  const copyContent = () => {
+    // Select the content of the div
+    const contentToCopy = document.getElementById("contentToCopy");
+
+    // Create a textarea element to temporarily hold the text
+    const textarea = document.createElement("textarea");
+    textarea.value = contentToCopy.innerText;
+
+    // Append the textarea to the body
+    document.body.appendChild(textarea);
+
+    // Select the text inside the textarea
+    textarea.select();
+
+    // Execute the copy command
+    document.execCommand("copy");
+
+    // Remove the textarea
+    document.body.removeChild(textarea);
+
+    // Alert the user that the content has been copied
+    alert("Content has been copied to clipboard!");
+  };
+
   return (
     <>
       <div className="bg-gray-900 hover:bg-[#112233] rounded-lg border border-gray-500 h-[200px] col-span-1 hover:scale-[1.03] flex flex-col" onClick={handleOpenModal}>
@@ -53,11 +77,13 @@ export default function SnipCard({ post }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="text-left border p-4 ">
-              <pre className="te" >{cleanSnipet}</pre>
+            <div className="text-left flex flex-wrap border p-4 ">
+              <code>
+                <pre id="contentToCopy" className="w-full" >{cleanSnipet}</pre>
+                </code>
             </div>
             <div className="max-w-[500px] flex flex-col gap-5 items-center justify-center text-black  w-full h-[100px] p-1 my-4" >
-              <button className="py-2 w-full transition-all duration-200 border hover:bg-cyan-400 hover:text-black hover:scale-[1.03] text-cyan-400 border-cyan-400" >Copy to ClipBoard</button>
+              <button onClick={copyContent} className="py-2 w-full transition-all duration-200 border hover:bg-cyan-400 hover:text-black hover:scale-[1.03] text-cyan-400 border-cyan-400" >Copy to ClipBoard</button>
               <div className="flex w-full gap-5 ">
                 <button className="py-2 w-1/2 transition-all duration-200 border border-black bg-cyan-400 hover:text-cyan-400 hover:bg-black hover:scale-[1.03] hover:border-cyan-400" >Clean Code</button>
                 <button className="py-2 w-1/2 transition-all duration-200 border border-black bg-cyan-400 hover:text-cyan-400 hover:bg-black hover:scale-[1.03] hover:border-cyan-400 " >Optimize Code</button>
