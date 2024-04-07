@@ -112,7 +112,7 @@ function createButton(pullRequestLink) {
       ) {
         console.log("Properties found");
         percentageElement.textContent =
-          results.percentage + "chances that this will work out!!";
+          results.percentage + " chances that this will work out!!";
         explanationElement.textContent = results.Explaination; // Corrected property name here
       } else {
         console.log("Other response structure");

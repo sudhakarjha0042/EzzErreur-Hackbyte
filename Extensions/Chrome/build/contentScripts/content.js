@@ -1,3 +1,4 @@
+import chrome from "chrome";
 console.log("Content script loaded");
 
 // Function to create the new button
@@ -112,7 +113,7 @@ function createButton(pullRequestLink) {
       ) {
         console.log("Properties found");
         percentageElement.textContent =
-          results.percentage + "chances that this will work out!!";
+          results.percentage + " chances that this will work out!!";
         explanationElement.textContent = results.Explaination; // Corrected property name here
       } else {
         console.log("Other response structure");
@@ -160,3 +161,11 @@ if (
     }
   });
 }
+
+var contextMenuItem = {
+  id: "saveCode",
+  title: "SaveCode",
+  contexts: ["selection"],
+};
+
+chrome.contextMenus.create(contextMenuItem);
