@@ -34,9 +34,9 @@ function Home() {
       <Sidebar />
       <div className="w-full items-center flex flex-col h-screen">
         <div className="w-full p-1 my-12">
-          <div className="w-full items-center justify-around flex">
+          <div className="w-full items-center justify-between flex px-8">
             <h1 className="text-4xl"> My Collections</h1>
-            <button className="text-xl rounded-md bg-cyan-950 hover:bg-cyan-500 hover:text-black transition-all duration-100 hover:scale-[1.02] p-1">Add Snippet!</button>
+            <button className="text-xl rounded-md bg-cyan-950 hover:bg-cyan-500 hover:text-black transition-all duration-100 hover:scale-[1.02] p-4">Add Snippet!</button>
           </div>
         </div>
         <div className="w-full px-3 overflow-y-scroll h-full ">
